@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Budgeting Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Login / Registration Section -->
+    <div id="auth-section" class="container auth-box">
+        <h2>Travel Budgeting Tool</h2>
+        <p class="subtitle">Organize your trips, itineraries, and expenses in one place.</p>
+        <form id="auth-form">
+            <input type="text" id="username" placeholder="Enter your name" required>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button type="submit" class="btn-primary">Login / Register</button>
+        </form>
+    </div>
+
+    <!-- Main Dashboard Section -->
+    <div id="dashboard-section" class="container hidden">
+        <header class="top-bar">
+            <div>
+                <h1>Travel Budgeting Tool</h1>
+                <p>Welcome, <strong id="display-user">Traveler</strong>!</p>
+            </div>
+            <div class="header-actions">
+                <button onclick="toggleDarkMode()" id="theme-btn" class="btn-secondary">🌙 Dark Mode</button>
+                <button onclick="window.print()" class="btn-secondary">Print / Save PDF</button>
+                <button onclick="logout()" class="btn-danger">Logout</button>
+            </div>
+        </header>
+
+        <!-- Budget Summary Cards -->
+        <div class="summary-grid">
+            <div class="card">
+                <h3>Total Trips</h3>
+                <p id="total-trips">0</p>
+            </div>
+            <div class="card">
+                <h3>Total Estimated Budget</h3>
+                <p id="total-budget">₹0</p>
+            </div>
+            <div class="card">
+                <h3>Saved Favorites</h3>
+                <p id="total-favs">0</p>
+            </div>
+        </div>
+
+        <!-- Add / Edit Trip Form -->
+        <section class="form-section">
+            <h3 id="form-title">Plan a New Trip</h3>
+            <form id="trip-form">
+                <input type="hidden" id="edit-index" value="-1">
+                <div class="form-grid">
+                    <input type="text" id="trip-title" placeholder="Trip Name (e.g., Jaipur Weekend)" required>
+                    <input type="text" id="destination" placeholder="Destination / Place" required>
+                    <input type="date" id="trip-date" required>
+                    <input type="time" id="trip-time" required>
+                    <input type="number" id="budget" placeholder="Total Budget / Cost (₹)" min="0" required>
+                    <input type="number" id="travelers" placeholder="Number of Travelers (e.g., 1)" min="1" value="1" required>
+                    <input type="text" id="itinerary" placeholder="Itinerary Details (e.g., Hotel, Sightseeing)" required>
+                </div>
+                <button type="submit" id="save-btn" class="btn-primary">Add Trip</button>
+                <button type="button" id="cancel-edit" class="btn-secondary hidden" onclick="resetForm()">Cancel</button>
+            </form>
+        </section>
+
+        <!-- Search and Filter Controls -->
+        <section class="controls-section">
+            <input type="text" id="search-input" placeholder="Search by trip name or destination..." onkeyup="renderTrips()">
+            <select id="filter-select" onchange="renderTrips()">
+                <option value="all">Show All Trips</option>
+                <option value="favorites">Favorites Only ★</option>
+            </select>
+        </section>
+
+        <!-- Trips List -->
+        <section class="trips-list" id="trips-container">
+            <!-- JavaScript will dynamically insert trips here -->
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
